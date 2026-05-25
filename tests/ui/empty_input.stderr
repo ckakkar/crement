@@ -1,0 +1,8 @@
+error: expected one of: `++expr`, `expr++`, `--expr`, `expr--`
+       hint: the macro requires an expression with a `++` or `--` operator
+ --> tests/ui/empty_input.rs:5:13
+  |
+5 |     let _ = crement!();
+  |             ^^^^^^^^^^
+  |
+  = note: this error originates in the macro `crement` (in Nightly builds, run with -Z macro-backtrace for more info)

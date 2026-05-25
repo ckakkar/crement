@@ -1,0 +1,29 @@
+[package]
+name = "crement"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.65"
+authors = ["Cyrus Kakkar <cyruskakkar@gmail.com>"]
+description = "Safe, zero-unsafe prefix and postfix ++ / -- for Rust — compile-time macros with automatic Copy/Clone dispatch for the old-value capture"
+license = "MIT"
+repository = "https://github.com/ckakkar/crement"
+documentation = "https://docs.rs/crement"
+homepage = "https://github.com/ckakkar/crement"
+readme = "README.md"
+keywords = ["increment", "decrement", "prefix", "postfix", "macro"]
+categories = ["development-tools", "rust-patterns", "no-std"]
+exclude = [
+    ".github/",
+    "tests/ui/",
+]
+
+[lib]
+proc-macro = true
+
+[dependencies]
+proc-macro2 = "1"
+quote = "1"
+syn = { version = "2", features = ["full"] }
+
+[dev-dependencies]
+trybuild = { version = "1", features = ["diff"] }
