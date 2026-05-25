@@ -47,7 +47,16 @@ jobs:
       - name: Build
         run: cargo build --all-targets
 
+        # On the MSRV toolchain, trybuild's transitive dep `serde_spanned`
+        # uses edition 2024 (requires rustc ≥ 1.85), so we skip the UI
+        # compile-fail tests there.  The macro itself and all 79 functional
+        # tests compile and pass on 1.65.
+      - name: Run tests (MSRV — skip trybuild UI tests)
+        if: matrix.rust == '1.65.0'
+        run: cargo test --test 01_basic --test 02_copy_types --test 03_clone_only --test 04_complex_exprs --test 05_sequences
+
       - name: Run tests
+        if: matrix.rust != '1.65.0'
         run: cargo test
 
       - name: Build docs

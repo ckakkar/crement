@@ -31,7 +31,10 @@ fn field_postfix_inc_returns_old() {
 
 #[test]
 fn field_prefix_dec() {
-    let mut sb = Scoreboard { hits: 10, misses: 3 };
+    let mut sb = Scoreboard {
+        hits: 10,
+        misses: 3,
+    };
     assert_eq!(pre_dec!(sb.misses), 2);
     assert_eq!(sb.misses, 2);
     assert_eq!(sb.hits, 10);
@@ -39,7 +42,10 @@ fn field_prefix_dec() {
 
 #[test]
 fn field_postfix_dec_returns_old() {
-    let mut sb = Scoreboard { hits: 10, misses: 5 };
+    let mut sb = Scoreboard {
+        hits: 10,
+        misses: 5,
+    };
     let old = post_dec!(sb.misses);
     assert_eq!(old, 5);
     assert_eq!(sb.misses, 4);
@@ -67,7 +73,9 @@ struct Inner {
 
 #[test]
 fn nested_field_postfix_inc() {
-    let mut o = Outer { inner: Inner { value: 7 } };
+    let mut o = Outer {
+        inner: Inner { value: 7 },
+    };
     let old = crement!(o.inner.value++);
     assert_eq!(old, 7);
     assert_eq!(o.inner.value, 8);

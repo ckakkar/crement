@@ -26,7 +26,10 @@ struct Nc {
 
 impl Nc {
     fn new(val: i64) -> Self {
-        Self { val, clones: Box::new(0) }
+        Self {
+            val,
+            clones: Box::new(0),
+        }
     }
     fn clone_count(&self) -> u32 {
         *self.clones
@@ -95,7 +98,7 @@ fn postfix_inc_returns_old_value() {
     let mut x = Nc::new(5);
     let old = post_inc!(x);
     assert_eq!(old.val, 5, "postfix ++ must return the old value");
-    assert_eq!(x.val, 6,   "postfix ++ must mutate in place");
+    assert_eq!(x.val, 6, "postfix ++ must mutate in place");
 }
 
 #[test]
@@ -103,7 +106,7 @@ fn postfix_dec_returns_old_value() {
     let mut x = Nc::new(5);
     let old = post_dec!(x);
     assert_eq!(old.val, 5, "postfix -- must return the old value");
-    assert_eq!(x.val, 4,   "postfix -- must mutate in place");
+    assert_eq!(x.val, 4, "postfix -- must mutate in place");
 }
 
 #[test]
@@ -128,7 +131,10 @@ fn postfix_clone_is_independent_of_original() {
     let snap = post_inc!(x);
     // Further mutate x — snap must NOT be affected.
     x.val = 999;
-    assert_eq!(snap.val, 7, "snapshot is a deep copy; mutating original must not alias it");
+    assert_eq!(
+        snap.val, 7,
+        "snapshot is a deep copy; mutating original must not alias it"
+    );
 }
 
 #[test]
@@ -136,7 +142,11 @@ fn postfix_clone_called_exactly_once() {
     let mut x = Nc::new(0);
     let snap = post_inc!(x);
     // The snapshot was created by exactly one Clone::clone call.
-    assert_eq!(snap.clone_count(), 1, "postfix must call clone exactly once");
+    assert_eq!(
+        snap.clone_count(),
+        1,
+        "postfix must call clone exactly once"
+    );
     // The variable itself was never cloned (it was mutated in place).
     assert_eq!(x.clone_count(), 0, "original must not have been cloned");
 }
@@ -168,7 +178,7 @@ fn sequential_postfix_inc_captures_successive_values() {
 fn mixed_prefix_postfix_sequence() {
     let mut x = Nc::new(0);
     let post = crement!(x++); // returns 0, x becomes 1
-    let pre  = crement!(++x); // x becomes 2, returns 2
+    let pre = crement!(++x); // x becomes 2, returns 2
     assert_eq!(post.val, 0);
     assert_eq!(pre.val, 2);
     assert_eq!(x.val, 2);
@@ -198,7 +208,10 @@ impl SubAssign<i64> for Counter {
 
 #[test]
 fn struct_with_string_field_postfix_inc() {
-    let mut c = Counter { label: "hits".into(), count: 99 };
+    let mut c = Counter {
+        label: "hits".into(),
+        count: 99,
+    };
     let old = post_inc!(c);
     assert_eq!(old.count, 99);
     assert_eq!(old.label, "hits");
@@ -210,7 +223,10 @@ fn struct_with_string_field_postfix_inc() {
 
 #[test]
 fn struct_with_string_field_prefix_dec() {
-    let mut c = Counter { label: "pages".into(), count: 10 };
+    let mut c = Counter {
+        label: "pages".into(),
+        count: 10,
+    };
     let new_val = pre_dec!(c);
     assert_eq!(new_val.count, 9);
     assert_eq!(c.count, 9);

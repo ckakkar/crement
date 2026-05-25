@@ -36,7 +36,7 @@
 //! ```
 
 use proc_macro::TokenStream;
-use proc_macro2::{Ident, Span, Spacing, TokenStream as TokenStream2, TokenTree};
+use proc_macro2::{Ident, Spacing, Span, TokenStream as TokenStream2, TokenTree};
 use quote::quote;
 use syn::{parse2, Error, Expr};
 
@@ -90,11 +90,17 @@ fn parse_crement_inner(input: TokenStream2) -> Result<Crement, Error> {
     if n >= 3 && is_joint(&tokens[0]) {
         if is_plus(&tokens[0]) && is_plus(&tokens[1]) {
             let rest: TokenStream2 = tokens[2..].iter().cloned().collect();
-            return parse2::<Expr>(rest).map(|expr| Crement { op: Op::PreInc, expr });
+            return parse2::<Expr>(rest).map(|expr| Crement {
+                op: Op::PreInc,
+                expr,
+            });
         }
         if is_minus(&tokens[0]) && is_minus(&tokens[1]) {
             let rest: TokenStream2 = tokens[2..].iter().cloned().collect();
-            return parse2::<Expr>(rest).map(|expr| Crement { op: Op::PreDec, expr });
+            return parse2::<Expr>(rest).map(|expr| Crement {
+                op: Op::PreDec,
+                expr,
+            });
         }
     }
 
@@ -102,11 +108,17 @@ fn parse_crement_inner(input: TokenStream2) -> Result<Crement, Error> {
     if n >= 3 && is_joint(&tokens[n - 2]) {
         if is_plus(&tokens[n - 2]) && is_plus(&tokens[n - 1]) {
             let rest: TokenStream2 = tokens[..n - 2].iter().cloned().collect();
-            return parse2::<Expr>(rest).map(|expr| Crement { op: Op::PostInc, expr });
+            return parse2::<Expr>(rest).map(|expr| Crement {
+                op: Op::PostInc,
+                expr,
+            });
         }
         if is_minus(&tokens[n - 2]) && is_minus(&tokens[n - 1]) {
             let rest: TokenStream2 = tokens[..n - 2].iter().cloned().collect();
-            return parse2::<Expr>(rest).map(|expr| Crement { op: Op::PostDec, expr });
+            return parse2::<Expr>(rest).map(|expr| Crement {
+                op: Op::PostDec,
+                expr,
+            });
         }
     }
 
@@ -267,7 +279,11 @@ pub fn crement(input: TokenStream) -> TokenStream {
 pub fn pre_inc(input: TokenStream) -> TokenStream {
     let ts: TokenStream2 = input.into();
     match parse2::<Expr>(ts) {
-        Ok(expr) => generate(Crement { op: Op::PreInc, expr }).into(),
+        Ok(expr) => generate(Crement {
+            op: Op::PreInc,
+            expr,
+        })
+        .into(),
         Err(e) => e.into_compile_error().into(),
     }
 }
@@ -292,7 +308,11 @@ pub fn pre_inc(input: TokenStream) -> TokenStream {
 pub fn post_inc(input: TokenStream) -> TokenStream {
     let ts: TokenStream2 = input.into();
     match parse2::<Expr>(ts) {
-        Ok(expr) => generate(Crement { op: Op::PostInc, expr }).into(),
+        Ok(expr) => generate(Crement {
+            op: Op::PostInc,
+            expr,
+        })
+        .into(),
         Err(e) => e.into_compile_error().into(),
     }
 }
@@ -316,7 +336,11 @@ pub fn post_inc(input: TokenStream) -> TokenStream {
 pub fn pre_dec(input: TokenStream) -> TokenStream {
     let ts: TokenStream2 = input.into();
     match parse2::<Expr>(ts) {
-        Ok(expr) => generate(Crement { op: Op::PreDec, expr }).into(),
+        Ok(expr) => generate(Crement {
+            op: Op::PreDec,
+            expr,
+        })
+        .into(),
         Err(e) => e.into_compile_error().into(),
     }
 }
@@ -341,7 +365,11 @@ pub fn pre_dec(input: TokenStream) -> TokenStream {
 pub fn post_dec(input: TokenStream) -> TokenStream {
     let ts: TokenStream2 = input.into();
     match parse2::<Expr>(ts) {
-        Ok(expr) => generate(Crement { op: Op::PostDec, expr }).into(),
+        Ok(expr) => generate(Crement {
+            op: Op::PostDec,
+            expr,
+        })
+        .into(),
         Err(e) => e.into_compile_error().into(),
     }
 }

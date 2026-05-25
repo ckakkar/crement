@@ -70,7 +70,7 @@ fn two_postfix_incs_are_independent() {
 fn prefix_and_postfix_on_separate_vars() {
     let mut x: i32 = 5;
     let mut y: i32 = 5;
-    let new_x = pre_inc!(x);  // 6
+    let new_x = pre_inc!(x); // 6
     let old_y = post_inc!(y); // 5, y becomes 6
     assert_eq!(new_x, 6);
     assert_eq!(old_y, 5);
@@ -167,7 +167,7 @@ fn postfix_result_in_match() {
 
 #[test]
 fn sum_via_postfix_inc_index() {
-    let numbers = vec![3i32, 1, 4, 1, 5, 9, 2, 6];
+    let numbers = [3i32, 1, 4, 1, 5, 9, 2, 6];
     let mut idx: usize = 0;
     let mut total: i32 = 0;
     while idx < numbers.len() {
