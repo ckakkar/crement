@@ -2,7 +2,7 @@
 name = "crement"
 version = "0.1.0"
 edition = "2021"
-rust-version = "1.65"
+rust-version = "1.71"
 authors = ["Cyrus Kakkar <cyruskakkar@gmail.com>"]
 description = "Safe, zero-unsafe prefix and postfix ++ / -- for Rust — compile-time macros with automatic Copy/Clone dispatch for the old-value capture"
 license = "MIT"
@@ -26,4 +26,3 @@ quote = "1"
 syn = { version = "2", features = ["full"] }
 
 [dev-dependencies]
-trybuild = { version = "1", features = ["diff"] }

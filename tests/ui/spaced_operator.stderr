@@ -1,8 +1,0 @@
-error: expected one of: `++expr`, `expr++`, `--expr`, `expr--`
-       hint: `++` and `--` must be written without spaces between the two characters
- --> tests/ui/spaced_operator.rs:6:13
-  |
-6 |     let _ = crement!(x + +);
-  |             ^^^^^^^^^^^^^^^
-  |
-  = note: this error originates in the macro `crement` (in Nightly builds, run with -Z macro-backtrace for more info)

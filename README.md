@@ -4,7 +4,7 @@
 [![docs.rs](https://docs.rs/crement/badge.svg)](https://docs.rs/crement)
 [![CI](https://github.com/ckakkar/crement/actions/workflows/ci.yml/badge.svg)](https://github.com/ckakkar/crement/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![MSRV: 1.65](https://img.shields.io/badge/MSRV-1.65-orange.svg)](https://blog.rust-lang.org/2022/11/03/Rust-1.65.0.html)
+[![MSRV: 1.71](https://img.shields.io/badge/MSRV-1.71-orange.svg)](https://blog.rust-lang.org/2023/11/16/Rust-1.71.1.html)
 
 Safe, zero-`unsafe` prefix and postfix `++` / `--` for Rust.
 
@@ -407,7 +407,7 @@ usage is unsupported.
 
 ## Minimum supported Rust version
 
-**1.65** (stable, released 2022-11-03).
+**1.71** (stable, released 2023-07-13), dictated by `syn 2.x`.
 
 Bumps to MSRV are treated as breaking changes and will be accompanied by a
 semver minor version bump.
